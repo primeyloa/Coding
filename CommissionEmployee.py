@@ -1,5 +1,5 @@
 class CommissionEmployee:
-    def __init__(self, first_name, last_name, social_security_number, gross_sales, commission_rate):
+    def __init__(self, first_name:str , last_name:str , social_security_number:str , gross_sales: float, commission_rate: float):
         self.__first_name = first_name
         self.__last_name = last_name
         self.__social_security_number = social_security_number
@@ -44,16 +44,19 @@ class CommissionEmployee:
         return self.__commission_rate
 
     def set_commission_rate(self, commission_rate):
-        if isinstance(commission_rate, float) or (commission_rate >1|commission_rate<0):
+        if isinstance(commission_rate, float) or (commission_rate < 1 | commission_rate > 0):
+            self.__commission_rate = commission_rate
+        else:
             raise ValueError("Value must be numeric (Preferably a float between 0 and 1)")
-        self.__commission_rate = commission_rate
 
     def earnings(self) -> float:
         grossSales = self.get_gross_sales()
         commissionRate = self.get_commission_rate()
         return grossSales*commissionRate
 
-if __name__=="__main__":
-    #creating an instance of CommissionEmployee class
-    employee1 = CommissionEmployee("John", "MacCarthy", "0011" ,4000, 0.3 )
-    employee1.set_gross
+
+employee1 = CommissionEmployee("John", "MacCarthy", "0011" ,4000, 0.3 )
+employee1.set_gross_sales(4500)
+employee1.set_commission_rate(0.4)
+space = " "
+print(f"{employee1.get_first_name()+ space + employee1.get_last_name()} earns: {employee1.earnings()}")
